@@ -54,6 +54,8 @@ final class UtilisateurController extends AbstractController
     public function edit(Request $request, Utilisateur $utilisateur, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
+        $form->remove("submit");
+        $form->remove("password");
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

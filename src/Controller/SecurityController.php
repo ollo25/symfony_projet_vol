@@ -2,8 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Utilisateur;
+use App\Form\UtilisateurType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -29,4 +34,24 @@ class SecurityController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
+    #[Route('/inscription', name: 'app_register')]
+    public function register(Request $request, EntityManagerInterface $entityManager,
+                             UserPasswordHasherInterface $passwordHasher): Response
+    {
+        $user = new Utilisateur();
+        $form = $this->createForm(UtilisateurType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $password = $form->get('password')->getData();
+            $hashedPassword = $passwordHasher->hashPassword($user, $password);
+            $user->setPassword($hashedPassword);
+            $entityManager->persist($user);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_login');
+        }
+        return $this->render('security/register.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
 }
