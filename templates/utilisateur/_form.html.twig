@@ -1,4 +1,40 @@
+{# templates/utilisateur/_form.html.twig #}
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="form-container">
+    <table class="table">
+        <tr>
+            <th>{{ form_label(form.email) }}</th>
+            <td>{{ form_widget(form.email) }}</td>
+        </tr>
+        <tr>
+            <th>{{ form_label(form.roles) }}</th>
+            <td>{{ form_widget(form.roles) }}</td>
+        </tr>
+        <tr>
+            <th>{{ form_label(form.refModele) }}</th>
+            <td>{{ form_widget(form.refModele) }}</td>
+        </tr>
+        <tr>
+            <th>{{ form_label(form.nom) }}</th>
+            <td>{{ form_widget(form.nom) }}</td>
+        </tr>
+        <tr>
+            <th>{{ form_label(form.prenom) }}</th>
+            <td>{{ form_widget(form.prenom) }}</td>
+        </tr>
+        <tr>
+            <th>{{ form_label(form.ville) }}</th>
+            <td>{{ form_widget(form.ville) }}</td>
+        </tr>
+        <tr>
+            <th>{{ form_label(form.date_naissance) }}</th>
+            <td>{{ form_widget(form.date_naissance) }}</td>
+        </tr>
+    </table>
+
+    <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </div>
+</div>
 {{ form_end(form) }}

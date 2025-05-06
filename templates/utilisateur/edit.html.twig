@@ -3,11 +3,14 @@
 {% block title %}Edit Utilisateur{% endblock %}
 
 {% block body %}
-    <h1>Edit Utilisateur</h1>
+    <div class="white-box">
+        <h1 class="text-center">Modification de {{ utilisateur.email }}</h1>
 
-    {{ include('utilisateur/_form.html.twig', {'button_label': 'Update'}) }}
+        {# Inclusion du fichier _form.html.twig pour le formulaire et son bouton submit #}
+        {% include 'utilisateur/_form.html.twig' with {'form': form} %}
+        <br>
+        {{ include('utilisateur/_delete_form.html.twig') }}
 
-    <a href="{{ path('app_utilisateur_index') }}">back to list</a>
-
-    {{ include('utilisateur/_delete_form.html.twig') }}
+        <a href="{{ path('app_utilisateur_index') }}">Retour à la liste</a>
+    </div>
 {% endblock %}

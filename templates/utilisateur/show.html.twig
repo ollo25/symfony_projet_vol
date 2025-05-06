@@ -3,8 +3,8 @@
 {% block title %}Utilisateur{% endblock %}
 
 {% block body %}
-    <h1>Utilisateur</h1>
-
+    <div class="white-box">
+        <h1 class="text-center">Information de {{ utilisateur.email }} </h1>
     <table class="table">
         <tbody>
             <tr>
@@ -20,8 +20,14 @@
                 <td>{{ utilisateur.roles ? utilisateur.roles|json_encode : '' }}</td>
             </tr>
             <tr>
-                <th>Password</th>
-                <td>{{ utilisateur.password }}</td>
+                <th>Modèle</th>
+                <td>
+                    {% if 'ROLE_PILOTE' in utilisateur.roles and utilisateur.refModele %}
+                        {{ utilisateur.refModele.marque ~ ' - ' ~ utilisateur.refModele.modele }}
+                    {% else %}
+                        Non Pilote
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Nom</th>
@@ -41,10 +47,12 @@
             </tr>
         </tbody>
     </table>
+        {{ include('utilisateur/_delete_form.html.twig') }}
 
-    <a href="{{ path('app_utilisateur_index') }}">back to list</a>
+        <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}">Modifier</a>
+        <br>
+        <a href="{{ path('app_utilisateur_index') }}">← Retour à la liste</a>
 
-    <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}">edit</a>
 
-    {{ include('utilisateur/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

@@ -1,4 +1,22 @@
+{# templates/avion/_form.html.twig #}
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="form-container">
+    <table class="table">
+        <tr>
+            <th>{{ form_label(form.nom) }}</th>
+            <td>{{ form_widget(form.nom) }}</td>
+        </tr>
+        <tr>
+            <th>{{ form_label(form.refModele) }}</th>
+            <td>{{ form_widget(form.refModele) }}</td>
+        </tr>
+    </table>
+
+    <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">
+            {{ button_label|default('Enregistrer') }}
+        </button>
+    </div>
+</div>
 {{ form_end(form) }}

@@ -3,7 +3,8 @@
 {% block title %}Avion{% endblock %}
 
 {% block body %}
-    <h1>Avion</h1>
+    <div class="white-box">
+        <h1 class="text-center">Information de {{ avion.nom}}</h1>
 
     <table class="table">
         <tbody>
@@ -18,9 +19,10 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_avion_index') }}">back to list</a>
+    <a href="{{ path('app_avion_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('app_avion_edit', {'id': avion.id}) }}">edit</a>
+    <a href="{{ path('app_avion_edit', {'id': avion.id}) }}">Modifier</a>
 
     {{ include('avion/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

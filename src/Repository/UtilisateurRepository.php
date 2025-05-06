@@ -32,6 +32,13 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
     }
+    public function nbUser(): int
+    {
+        return $this->createQueryBuilder('u')
+            ->select('COUNT(u.email)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 
     //    /**
     //     * @return Utilisateur[] Returns an array of Utilisateur objects
