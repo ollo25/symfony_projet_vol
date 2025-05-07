@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Modele{% endblock %}
+
+{% block body %}
+    <div class="white-box">
+        <h1 class="text-center">Création d'un nouveau modele</h1>
+
+    {{ include('modele/_form.html.twig') }}
+
+    <a href="{{ path('app_modele_index') }}">retour </a>
+    </div>
+{% endblock %}

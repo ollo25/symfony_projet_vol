@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <header data-jarallax data-speed=".8">
+        <div class="d-flex flex-column bg-opacity-50 pt-10 pt-md-8 pb-7 pb-md-0">
+            <div class="container my-auto">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-6 text-center">
+
+                        <!-- Heading -->
+                        <h1 class="display-1 text-white mb-4"><img src="{{ asset('assets/img/logo.png') }}" alt="Logo"></h1>
+
+                        <!-- Subheading -->
+                        <p class="text-center text-white text-opacity-75 mb-7">
+                            Votre porte d'entrée vers le monde. Connectez-vous aux cinq continents avec des vols directs, rapides et confortables, pour toutes vos aventures.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}

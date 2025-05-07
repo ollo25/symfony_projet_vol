@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Entité Modele{% endblock %}
+
+{% block body %}
+        {{ form_start(form) }}
+        <table class="table">
+            <tr>
+                <th>{{ form_label(form.marque) }}</th>
+                <td>{{ form_widget(form.marque) }}</td>
+            </tr>
+            <tr>
+                <th>{{ form_label(form.modele) }}</th>
+                <td>{{ form_widget(form.modele) }}</td>
+            </tr>
+        </table>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Sauvegarder</button>
+        </div>
+        {{ form_end(form) }}
+{% endblock %}

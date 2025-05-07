@@ -1,0 +1,36 @@
+{# templates/vol/_form.html.twig #}
+
+{{ form_start(form) }}
+<div class="form-container">
+    <table class="table">
+        <tr>
+            <th>{{ form_label(form.villeDepart) }}</th>
+            <td>{{ form_widget(form.villeDepart) }}</td>
+        </tr>
+        <tr>
+            <th>{{ form_label(form.villeArrive) }}</th>
+            <td>{{ form_widget(form.villeArrive) }}</td>
+        </tr>
+        <tr>
+            <th>{{ form_label(form.dateDepart) }}</th>
+            <td>{{ form_widget(form.dateDepart) }}</td>
+        </tr>
+        <tr>
+            <th>{{ form_label(form.heureDepart) }}</th>
+            <td>{{ form_widget(form.heureDepart) }}</td>
+        </tr>
+        <tr>
+            <th>{{ form_label(form.prixBilletInitiale) }}</th>
+            <td>{{ form_widget(form.prixBilletInitiale) }}</td>
+        </tr>
+        <tr>
+            <th>{{ form_label(form.refAvion) }}</th>
+            <td>{{ form_widget(form.refAvion) }}</td>
+        </tr>
+    </table>
+
+    <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </div>
+</div>
+{{ form_end(form) }}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+
+
+
+    <div class="white-box">
+        <h1 class="text-center">Bienvenue {{ app.user.nom }}</h1>
+        <h2 class="text-center">Accès spécial : Panneau d'administration</h2>
+        <ul>
+            <li>
+                <a href="{{ path('app_utilisateur_index') }}">Gestions des Utilisateurs</a>
+            </li>
+            <li>
+                <a href="{{ path('app_avion_index') }}">Gestions des Avions</a>
+            </li>
+            <li>
+                <a href="{{ path('app_modele_index') }}">Gestions des Modèles</a>
+            </li>
+            <li>
+                <a href="{{ path('app_vol_index') }}">Gestions des Vols</a>
+            </li>
+            <li>
+                <a href="{{ path('app_reservation_index') }}">Gestions des Réservations</a>
+            </li>
+            <h4> <u><br> Pilotes :</u></h4>
+            <li>
+                <a href="{{ path('app_conges_index') }}">Gestions des Congés</a>
+            </li>
+
+
+        </ul>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Modele{% endblock %}
+
+{% block body %}
+    <div class="white-box">
+        <h1 class="text-center">Modification de {{ modele.marque }} - {{ modele.modele }}</h1>
+        {{ include('modele/_form.html.twig', {'button_label': 'Update'}) }}
+        <br>
+        {{ include('modele/_delete_form.html.twig') }}
+
+
+        <a href="{{ path('app_modele_index') }}">Retour à la liste</a>
+
+    </div>
+{% endblock %}
