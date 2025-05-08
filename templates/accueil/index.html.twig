@@ -16,7 +16,11 @@
                         <p class="text-center text-white text-opacity-75 mb-7">
                             Votre porte d'entrée vers le monde. Connectez-vous aux cinq continents avec des vols directs, rapides et confortables, pour toutes vos aventures.
                         </p>
-
+                        <br><br><br>
+                        <form method="get" action="{{ path('vol_search') }}" class="search-bar">
+                            <input type="text" name="q" placeholder="Destination..." value="{{ app.request.get('q') }}">
+                            <button type="submit">🔍</button>
+                        </form>
                     </div>
                 </div>
             </div>

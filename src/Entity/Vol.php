@@ -37,10 +37,6 @@ class Vol
     #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'refVol', orphanRemoval: true)]
     private Collection $refReservation;
 
-    #[ORM\ManyToOne(inversedBy: 'refVols')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Avion $refAvion = null;
-
 
     public function __construct()
     {
@@ -152,4 +148,5 @@ class Vol
 
         return $this;
     }
+
 }

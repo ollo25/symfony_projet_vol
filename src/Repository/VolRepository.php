@@ -31,4 +31,16 @@ class VolRepository extends ServiceEntityRepository
     //         ->getQuery()
     //         ->getResult();
     // }
+    public function searchByDestination(?string $query): array
+    {
+        if (!$query) {
+            return [];
+        }
+
+        return $this->createQueryBuilder('v')
+            ->where('v.villeArrive LIKE :query OR v.villeDepart LIKE :query')
+            ->setParameter('query', '%' . $query . '%')
+            ->getQuery()
+            ->getResult();
+    }
 }

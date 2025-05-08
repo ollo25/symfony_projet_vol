@@ -30,6 +30,7 @@ final class VolController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager->persist($vol);
             $entityManager->flush();
 
@@ -42,7 +43,7 @@ final class VolController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_vol_show', methods: ['GET'])]
+    #[Route('/{id<\d+>}', name: 'app_vol_show', methods: ['GET'])]
     public function show(Vol $vol): Response
     {
         return $this->render('vol/show.html.twig', [
@@ -77,5 +78,15 @@ final class VolController extends AbstractController
         }
 
         return $this->redirectToRoute('app_vol_index', [], Response::HTTP_SEE_OTHER);
+    }
+    #[Route('/recherche', name: 'vol_search')]
+    public function search(Request $request, VolRepository $volRepository): Response
+    {
+        $query = $request->query->get('q');
+        $vols = $volRepository->searchByDestination($query);
+
+        return $this->render('accueil/rechercheVol.html.twig', [
+            'vols' => $vols,
+        ]);
     }
 }

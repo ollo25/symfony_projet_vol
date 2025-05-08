@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Repository\VolRepository;
+
 
 #[Route('/reservation')]
 final class ReservationController extends AbstractController
@@ -22,10 +24,22 @@ final class ReservationController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_reservation_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/reservation/new', name: 'reservation_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager, VolRepository $volRepository): Response
     {
         $reservation = new Reservation();
+
+        $volId = $request->query->get('ref_vol_id');
+        $prixBillet = $request->query->get('prix_billet');
+
+        if ($volId) {
+            $vol = $volRepository->find($volId);
+            if ($vol) {
+                $reservation->setRefVol($vol);
+                $reservation->setPrixBillet($prixBillet);
+            }
+        }
+
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
 
@@ -33,13 +47,35 @@ final class ReservationController extends AbstractController
             $entityManager->persist($reservation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('reservation_index');
         }
 
         return $this->render('reservation/new.html.twig', [
             'reservation' => $reservation,
             'form' => $form,
         ]);
+    }
+    #[Route('/reservation/create/{ref_vol_id}/{prix_billet}', name: 'reservation_create', methods: ['GET'])]
+    public function createDirectReservation(
+        int $ref_vol_id,
+        float $prix_billet,
+        VolRepository $volRepository,
+        EntityManagerInterface $entityManager
+    ): Response {
+        $vol = $volRepository->find($ref_vol_id);
+
+        if (!$vol) {
+            throw $this->createNotFoundException('Vol non trouvé');
+        }
+
+        $reservation = new Reservation();
+        $reservation->setRefVol($vol);
+        $reservation->setPrixBillet($prix_billet);
+
+        $entityManager->persist($reservation);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_reservation_index');
     }
 
     #[Route('/{id}', name: 'app_reservation_show', methods: ['GET'])]
